@@ -59,9 +59,17 @@ class AdvertController extends Controller
 
   public function viewAction($id)
   {
+
+    $advert=array(
+      'title'=>'Recherchons développeur Symfony virtuose',
+      'id'=>$id,
+      'author'=>'Alexandre',
+      'content'=>'C est sur Lyon que ça se passe mais sinon le reste c est super.',
+      'date'=> new \Datetime()
+    );
     // Ici, on récupérera l'annonce correspondante à l'id $id
     return $this->render('OCPlatformBundle:Advert:view.html.twig', array(
-      'id' => $id
+      'advert' => $advert
     ));
   }
   public function addAction(Request $request)
@@ -85,7 +93,15 @@ class AdvertController extends Controller
       $request->getSession()->getFlashBag()->add('notice', 'Annonce bien modifiée.');
       return $this->redirectToRoute('oc_platform_view', array('id' => 5));
     }
-    return $this->render('OCPlatformBundle:Advert:edit.html.twig');
+
+    $advert=array(
+      'title'=>'Recherche active de développeur Symfony',
+      'id'=>$id,
+      'author'=>'Alexandre',
+      'content'=>'Nous recherchons un développeur Synfony sur Lyon.',
+      'date'=> new \Datetime()
+    );
+    return $this->render('OCPlatformBundle:Advert:edit.html.twig', array('advert'=>$advert));
   }
   public function deleteAction($id)
   {
