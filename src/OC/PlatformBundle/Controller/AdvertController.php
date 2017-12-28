@@ -15,10 +15,48 @@ class AdvertController extends Controller
       // une page d'erreur 404 (qu'on pourra personnaliser plus tard d'ailleurs)
       throw new NotFoundHttpException('Page "'.$page.'" inexistante.');
     }
+
+    $listAdverts =  array(
+      array(
+        'title'=>'Recherche Développeur Symfony 3',
+        'id'=>1,
+        'author'=>'Alexandre',
+        'content'=>'Pour un poste sur Lyon',
+        'date'=> new \Datetime()
+      ),
+      array(
+        'title'=>'Mission pour super Webmaster',
+        'id'=>2,
+        'author'=>'Victor',
+        'content'=>'Nous recherchons un Webmaster qui sera super cool et très performant',
+        'date'=> new \Datetime()
+      ),
+      array(
+        'title'=>'Offre de stage tout pourri',
+        'id'=>3,
+        'author'=>'Yaelle',
+        'content'=>'Me demandez pas les détails, c est à Courbevoie',
+        'date'=> new \Datetime()
+      )
+
+
+
+    );
     // Ici, on récupérera la liste des annonces, puis on la passera au template
     // Mais pour l'instant, on ne fait qu'appeler le template
-    return $this->render('OCPlatformBundle:Advert:index.html.twig');
+    return $this->render('OCPlatformBundle:Advert:index.html.twig', array ('listAdverts'=>$listAdverts));
   }
+
+  public function menuAction($limit){
+    $listAdverts = array(
+        array("id"=>2, "title"=>'Recherche développeur Symfony'),
+        array("id"=>5, "title"=> 'Mission de webmaster'),
+        array("id"=>9, "title"=> 'Offre de stage de webdesign')
+    );
+    return $this->render('OCPlatformBundle:Advert:menu.html.twig', array('listAdverts' =>$listAdverts));
+
+  }
+
   public function viewAction($id)
   {
     // Ici, on récupérera l'annonce correspondante à l'id $id
